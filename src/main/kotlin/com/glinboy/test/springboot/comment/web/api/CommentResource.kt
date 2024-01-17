@@ -21,7 +21,7 @@ class CommentResource(val commentService: CommentService) {
         ResponseEntity.ok(commentService.getComments(pageable))
 
     @GetMapping("{id}")
-    fun getBook(@PathVariable id: String): ResponseEntity<CommentDTO> =
+    fun getComment(@PathVariable id: String): ResponseEntity<CommentDTO> =
         commentService.getComment(id)
             ?.let { ResponseEntity.ok(it) }
             ?: ResponseEntity.notFound().build()
