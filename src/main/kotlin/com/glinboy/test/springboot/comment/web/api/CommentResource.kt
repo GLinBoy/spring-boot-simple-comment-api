@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -19,4 +20,9 @@ class CommentResource(val commentService: CommentService) {
     fun getComments(@Parameter(hidden = true) pageable: Pageable): ResponseEntity<Page<CommentDTO>> =
         ResponseEntity.ok(commentService.getComments(pageable))
 
+    @GetMapping("{id}")
+    fun getBook(@PathVariable id: String): ResponseEntity<CommentDTO> =
+        commentService.getComment(id)
+            ?.let { ResponseEntity.ok(it) }
+            ?: ResponseEntity.notFound().build()
 }
