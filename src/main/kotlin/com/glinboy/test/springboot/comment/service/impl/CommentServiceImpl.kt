@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
+import java.util.*
 
 @Service
 class CommentServiceImpl(
@@ -19,9 +20,14 @@ class CommentServiceImpl(
             modelMapper.map<CommentDTO>(it, Comment::class.java)
         }
 
-    override fun getComment(id: Long): CommentDTO? = throw NotImplementedError()
+    override fun getComment(id: String): CommentDTO? =
+        commentRepository.findById(UUID.fromString(id))
+            .map {
+                modelMapper.map<CommentDTO>(it, Comment::class.java)
+            }
+            .orElse(null)
 
     override fun saveComment(commentDTO: CommentDTO): CommentDTO = throw NotImplementedError()
 
-    override fun deleteComment(id: Long) = throw NotImplementedError()
+    override fun deleteComment(id: String) = throw NotImplementedError()
 }
