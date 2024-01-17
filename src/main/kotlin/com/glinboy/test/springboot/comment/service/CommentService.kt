@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable
 
 interface CommentService {
     fun getComments(pageable: Pageable): Page<CommentDTO>
-    fun getComment(id: Long): CommentDTO?
+    fun getComment(id: String): CommentDTO?
     fun saveComment(commentDTO: CommentDTO): CommentDTO
-    fun deleteComment(id: Long)
+    fun deleteComment(id: String)
 }
