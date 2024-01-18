@@ -27,7 +27,11 @@ class CommentServiceImpl(
             }
             .orElse(null)
 
-    override fun saveComment(commentDTO: CommentDTO): CommentDTO = throw NotImplementedError()
+    override fun saveComment(commentDTO: CommentDTO): CommentDTO {
+        var comment = modelMapper.map(commentDTO, Comment::class.java)
+        comment = commentRepository.save(comment)
+        return modelMapper.map(comment, CommentDTO::class.java)
+    }
 
     override fun deleteComment(id: String) = commentRepository.deleteById(UUID.fromString(id))
 }
