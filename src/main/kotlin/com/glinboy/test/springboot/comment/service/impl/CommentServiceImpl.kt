@@ -29,5 +29,5 @@ class CommentServiceImpl(
 
     override fun saveComment(commentDTO: CommentDTO): CommentDTO = throw NotImplementedError()
 
-    override fun deleteComment(id: String) = throw NotImplementedError()
+    override fun deleteComment(id: String) = commentRepository.deleteById(UUID.fromString(id))
 }
