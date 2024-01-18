@@ -13,3 +13,7 @@ class ModelMapperConfig {
 class UUIDToStringConverter: AbstractConverter<UUID, String>() {
     override fun convert(source: UUID?): String? = source?.toString()
 }
+
+class StringToUUIDConverter: AbstractConverter<String, UUID>(){
+    override fun convert(source: String?): UUID? = source?.let{ UUID.fromString(it) }
+}
