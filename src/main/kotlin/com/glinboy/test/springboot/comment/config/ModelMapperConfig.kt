@@ -9,3 +9,7 @@ class ModelMapperConfig {
     @Bean
     fun modelMapper(): ModelMapper = ModelMapper()
 }
+
+class UUIDToStringConverter: AbstractConverter<UUID, String>() {
+    override fun convert(source: UUID?): String? = source?.toString()
+}
