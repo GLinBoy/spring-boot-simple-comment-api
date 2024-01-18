@@ -6,10 +6,7 @@ import io.swagger.v3.oas.annotations.Parameter
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 
 @RestController
@@ -25,4 +22,10 @@ class CommentResource(val commentService: CommentService) {
         commentService.getComment(id)
             ?.let { ResponseEntity.ok(it) }
             ?: ResponseEntity.notFound().build()
+
+    @DeleteMapping("{id}")
+    fun deleteComment(@PathVariable id: String): ResponseEntity<Unit> {
+        commentService.deleteComment(id)
+        return ResponseEntity.noContent().build()
+    }
 }
