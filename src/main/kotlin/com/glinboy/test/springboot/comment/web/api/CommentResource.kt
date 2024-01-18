@@ -5,6 +5,7 @@ import com.glinboy.test.springboot.comment.service.dto.CommentDTO
 import io.swagger.v3.oas.annotations.Parameter
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
@@ -22,6 +23,10 @@ class CommentResource(val commentService: CommentService) {
         commentService.getComment(id)
             ?.let { ResponseEntity.ok(it) }
             ?: ResponseEntity.notFound().build()
+
+    @PostMapping
+    fun addComment(@RequestBody commentDTO: CommentDTO): ResponseEntity<CommentDTO> =
+        ResponseEntity(commentService.saveComment(commentDTO), HttpStatus.CREATED)
 
     @DeleteMapping("{id}")
     fun deleteComment(@PathVariable id: String): ResponseEntity<Unit> {
