@@ -23,7 +23,7 @@ class CommentServiceImpl(
     override fun getComment(id: String): CommentDTO? =
         commentRepository.findById(UUID.fromString(id))
             .map {
-                modelMapper.map<CommentDTO>(it, Comment::class.java)
+                modelMapper.map<CommentDTO>(it, CommentDTO::class.java)
             }
             .orElse(null)
 
