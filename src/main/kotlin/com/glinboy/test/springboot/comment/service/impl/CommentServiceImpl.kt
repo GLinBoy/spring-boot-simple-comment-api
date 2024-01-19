@@ -17,7 +17,7 @@ class CommentServiceImpl(
 ) : CommentService {
     override fun getComments(pageable: Pageable): Page<CommentDTO> =
         commentRepository.findAll(pageable).map {
-            modelMapper.map<CommentDTO>(it, Comment::class.java)
+            modelMapper.map<CommentDTO>(it, CommentDTO::class.java)
         }
 
     override fun getComment(id: String): CommentDTO? =
