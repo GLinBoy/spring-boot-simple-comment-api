@@ -15,13 +15,13 @@ class CommentServiceImpl(
 ) : CommentService {
     override fun getComments(pageable: Pageable): Page<CommentDTO> =
         commentRepository.findAll(pageable).map {
-            CommentDTO(it.id?.toString(), it.fullName, it.email, it.content)
+            CommentDTO(it.id?.toString(), it.fullName, it.email, it.content, it.pageId)
         }
 
     override fun getComment(id: String): CommentDTO? =
         commentRepository.findById(UUID.fromString(id))
             .map {
-                CommentDTO(it.id?.toString(), it.fullName, it.email, it.content)
+                CommentDTO(it.id?.toString(), it.fullName, it.email, it.content, it.pageId)
             }
             .orElse(null)
 
@@ -30,10 +30,17 @@ class CommentServiceImpl(
             commentDTO.id?.let { UUID.fromString(it) },
             commentDTO.fullName,
             commentDTO.email,
-            commentDTO.content
+            commentDTO.content,
+            commentDTO.pageId
         )
         comment = commentRepository.save(comment)
-        return CommentDTO(comment.id?.toString(), comment.fullName, comment.email, comment.content)
+        return CommentDTO(
+            comment.id?.toString(),
+            comment.fullName,
+            comment.email,
+            comment.content,
+            comment.pageId
+        )
     }
 
     override fun deleteComment(id: String) = commentRepository.deleteById(UUID.fromString(id))
