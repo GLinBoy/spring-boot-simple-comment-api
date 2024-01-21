@@ -33,4 +33,11 @@ class CommentResource(val commentService: CommentService) {
         commentService.deleteComment(id)
         return ResponseEntity.noContent().build()
     }
+
+    @GetMapping("page/{pageId}")
+    fun getPageComments(
+        @PathVariable pageId: String,
+        @Parameter(hidden = true) pageable: Pageable
+    ): ResponseEntity<Page<CommentDTO>> =
+        ResponseEntity.ok(commentService.getPageComments(pageId, pageable))
 }
