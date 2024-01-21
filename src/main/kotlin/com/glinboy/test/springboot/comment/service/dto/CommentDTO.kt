@@ -4,5 +4,6 @@ data class CommentDTO(
     var id: String? = null,
     var fullName: String,
     var email: String,
-    var content: String
+    var content: String,
+    var pageId: String,
 )
