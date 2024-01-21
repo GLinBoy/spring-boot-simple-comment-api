@@ -44,4 +44,8 @@ class CommentServiceImpl(
     }
 
     override fun deleteComment(id: String) = commentRepository.deleteById(UUID.fromString(id))
+    override fun getPageComments(pageId: String, pageable: Pageable): Page<CommentDTO> =
+        commentRepository.findAllByPageId(pageId, pageable).map {
+            CommentDTO(it.id?.toString(), it.fullName, it.email, it.content, it.pageId)
+        }
 }
