@@ -9,4 +9,5 @@ interface CommentService {
     fun getComment(id: String): CommentDTO?
     fun saveComment(commentDTO: CommentDTO): CommentDTO
     fun deleteComment(id: String)
+    fun getPageComments(pageId: String, pageable: Pageable): Page<CommentDTO>
 }
