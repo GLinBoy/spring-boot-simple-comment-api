@@ -21,7 +21,7 @@ repositories {
     mavenCentral()
 }
 
-val springDocVersion = "2.5.0"
+val springDocVersion = "2.6.0"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
