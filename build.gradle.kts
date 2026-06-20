@@ -5,7 +5,7 @@ plugins {
     kotlin("plugin.spring") version "2.3.21"
     kotlin("plugin.jpa") version "2.3.21"
     id ("org.ec4j.editorconfig") version "0.1.0"
-    id ("com.github.ben-manes.versions") version "0.53.0"
+    id ("com.github.ben-manes.versions") version "0.54.0"
 }
 
 group = "com.glinboy.test.springboot"
@@ -21,7 +21,7 @@ repositories {
     mavenCentral()
 }
 
-val springDocVersion = "3.0.2"
+val springDocVersion = "3.0.3"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-h2console")
